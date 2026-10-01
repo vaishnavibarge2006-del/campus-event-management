@@ -16,7 +16,9 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
 
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .cors(cors -> cors.configurationSource(
+                new CorsConfig().corsConfigurationSource()
+            ))
 
             .sessionManagement(session ->
                 session.sessionCreationPolicy(
@@ -47,10 +49,5 @@ public class SecurityConfig {
             throws Exception {
 
         return config.getAuthenticationManager();
-    }
-
-    @Bean
-    public org.springframework.web.cors.CorsConfigurationSource corsConfigurationSource() {
-        return new CorsConfig().corsConfigurationSource();
     }
 }
